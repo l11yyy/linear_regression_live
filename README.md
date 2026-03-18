@@ -1,38 +1,37 @@
-# linear_regression_live
-This is the code for the "How to Do Linear Regression the Right Way" live session by Siraj Raval on Youtube
+# SpirePrototype
 
+一个基于 Godot 4 的基础卡牌 Roguelike 原型框架，目标是先把类似《杀戮尖塔》的核心战斗骨架搭起来，方便后续继续迭代地图、奖励、遗物、状态效果和更多敌人逻辑。
 
-## Overview
+## 当前已搭建内容
 
-This is the code for [this](https://youtu.be/uwwWVAgJBcM) video on Youtube by Siraj Raval. I'm using a small dataset of student test scores and the amount of hours they studied. Intuitively, there must be a relationship right? The more you study, the better your test scores should be. We're going to use [linear regression](https://onlinecourses.science.psu.edu/stat501/node/250) to prove this relationship. 
+- Godot 4 项目入口与主场景。
+- 单场战斗循环：抽牌、出牌、结束回合、敌方意图、胜负判定。
+- 基础数据模型：玩家、敌人、卡牌、牌库、弃牌堆、手牌。
+- 极简 UI：展示回合、敌方意图、角色数值、战斗日志、手牌按钮。
+- 预留脚本目录结构，便于继续拆分系统。
 
-Here are some helpful links:
+## 目录结构
 
-#### Gradient descent visualization
-https://raw.githubusercontent.com/mattnedrich/GradientDescentExample/master/gradient_descent_example.gif
+```text
+scenes/
+  main.tscn                # 主战斗场景
+scripts/
+  main.gd                  # 场景装配入口
+  core/game_state.gd       # 战斗状态与回合逻辑
+  ui/battle_screen.gd      # UI 渲染与交互
+  ui/card_button.gd        # 手牌按钮组件
+  data/                    # 预留资源数据类
+```
 
-#### Sum of squared distances formula (to calculate our error)
-https://spin.atomicobject.com/wp-content/uploads/linear_regression_error1.png
+## 运行方式
 
-#### Partial derivative with respect to b and m (to perform gradient descent)
-https://spin.atomicobject.com/wp-content/uploads/linear_regression_gradient1.png
+1. 安装 Godot 4.2 或兼容版本。
+2. 用 Godot 打开本仓库目录。
+3. 运行主场景 `res://scenes/main.tscn`，或直接运行项目。
 
-## Dependencies
+## 下一步建议
 
-* numpy
-
-Python 2 and 3 both work for this. Use [pip](https://pip.pypa.io/en/stable/) to install any dependencies.
-
-## Usage
-
-Just run ``python3 demo.py`` to see the results:
-
-   ```
-Starting gradient descent at b = 0, m = 0, error = 5565.107834483211
-Running...
-After 1000 iterations b = 0.08893651993741346, m = 1.4777440851894448, error = 112.61481011613473
-   ```
-
-## Credits
-
-Credits for this code go to [mattnedrich](https://github.com/mattnedrich). I've merely created a wrapper to get people started. 
+- 把卡牌与敌人改成 `.tres` / `.res` 资源驱动。
+- 增加状态效果系统，例如易伤、虚弱、力量。
+- 加入地图节点、事件房、奖励结算与卡牌升级。
+- 将战斗逻辑与 UI 进一步解耦，补充自动化测试。
