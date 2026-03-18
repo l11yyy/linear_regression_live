@@ -1,0 +1,173 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1s57m1d5m2x8"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_f5r2c"]
+[ext_resource type="Script" path="res://scripts/ui/battle_screen.gd" id="2_u1x9n"]
+[ext_resource type="Script" path="res://scripts/core/game_state.gd" id="3_y7b6p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.109804, 0.121569, 0.176471, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.556863, 0.458824, 0.247059, 1)
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f5r2c")
+
+[node name="GameState" type="Node" parent="."]
+script = ExtResource("3_y7b6p")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0470588, 0.0588235, 0.0941176, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 24
+
+[node name="BattleScreen" type="Control" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_u1x9n")
+
+[node name="RootPanel" type="Panel" parent="MarginContainer/BattleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/BattleScreen/RootPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 18
+
+[node name="Header" type="HBoxContainer" parent="MarginContainer/BattleScreen/RootPanel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="MarginContainer/BattleScreen/RootPanel/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Spire Prototype"
+
+[node name="TurnLabel" type="Label" parent="MarginContainer/BattleScreen/RootPanel/VBox/Header"]
+layout_mode = 2
+text = "Turn 1"
+
+[node name="IntentLabel" type="Label" parent="MarginContainer/BattleScreen/RootPanel/VBox"]
+layout_mode = 2
+text = "Enemy intent"
+
+[node name="Combatants" type="HBoxContainer" parent="MarginContainer/BattleScreen/RootPanel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="PlayerPanel" type="PanelContainer" parent="MarginContainer/BattleScreen/RootPanel/VBox/Combatants"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PlayerVBox" type="VBoxContainer" parent="MarginContainer/BattleScreen/RootPanel/VBox/Combatants/PlayerPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="PlayerName" type="Label" parent="MarginContainer/BattleScreen/RootPanel/VBox/Combatants/PlayerPanel/PlayerVBox"]
+layout_mode = 2
+text = "Ironclad Clone"
+
+[node name="PlayerStats" type="Label" parent="MarginContainer/BattleScreen/RootPanel/VBox/Combatants/PlayerPanel/PlayerVBox"]
+layout_mode = 2
+text = "HP 80/80 | Block 0 | Energy 3"
+
+[node name="EnemyPanel" type="PanelContainer" parent="MarginContainer/BattleScreen/RootPanel/VBox/Combatants"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="EnemyVBox" type="VBoxContainer" parent="MarginContainer/BattleScreen/RootPanel/VBox/Combatants/EnemyPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="EnemyName" type="Label" parent="MarginContainer/BattleScreen/RootPanel/VBox/Combatants/EnemyPanel/EnemyVBox"]
+layout_mode = 2
+text = "Training Dummy"
+
+[node name="EnemyStats" type="Label" parent="MarginContainer/BattleScreen/RootPanel/VBox/Combatants/EnemyPanel/EnemyVBox"]
+layout_mode = 2
+text = "HP 45/45 | Block 0"
+
+[node name="LogPanel" type="PanelContainer" parent="MarginContainer/BattleScreen/RootPanel/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 180)
+
+[node name="LogText" type="RichTextLabel" parent="MarginContainer/BattleScreen/RootPanel/VBox/LogPanel"]
+layout_mode = 2
+bbcode_enabled = true
+scroll_active = true
+fit_content = true
+text = "Battle log"
+
+[node name="HandSection" type="VBoxContainer" parent="MarginContainer/BattleScreen/RootPanel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HandLabel" type="Label" parent="MarginContainer/BattleScreen/RootPanel/VBox/HandSection"]
+layout_mode = 2
+text = "Hand"
+
+[node name="HandCards" type="HBoxContainer" parent="MarginContainer/BattleScreen/RootPanel/VBox/HandSection"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Actions" type="HBoxContainer" parent="MarginContainer/BattleScreen/RootPanel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="EndTurnButton" type="Button" parent="MarginContainer/BattleScreen/RootPanel/VBox/Actions"]
+layout_mode = 2
+text = "End Turn"
+
+[node name="ResetButton" type="Button" parent="MarginContainer/BattleScreen/RootPanel/VBox/Actions"]
+layout_mode = 2
+text = "Reset Battle"
